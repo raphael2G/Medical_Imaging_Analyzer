@@ -1,7 +1,7 @@
 # How to start web viewer
-1. cd into the "viewer" directory
-2. run command in terminal "npm install --force"
-3. run command in terminal "npm start"
+- cd into the "viewer" directory
+- run command in terminal "npm install --force"
+- run command in terminal "npm start"
 The viewer is now open. You can upload .vti files (more to be implemented soon, see to-do) to display volumes. See usage on more. 
 
 # How to enable model inference and integrated file conversion
