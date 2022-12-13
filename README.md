@@ -15,8 +15,8 @@ model inference and integrated file conversion is now enabled. You are now able 
 
 # To-Do
 - Revamp imaging viewer to previous estabishment (reenabling window, level, transfer functions)
-- Implement native IP and port for API usage
+- Implement native IP and port detection for API usage
 - Integrate file conversion API
-- Implement segmentation model through API
+- Implement segmentation model visualization through API
 
  
