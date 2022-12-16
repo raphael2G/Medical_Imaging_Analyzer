@@ -7,6 +7,7 @@ import io
 from image_proccessing.remove_background import remove_background
 from image_proccessing.process_image import process_image
 from inference.classification_inference import run_classification_inference
+from inference.segmentation_inference import run_segmentation_inference
 
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
