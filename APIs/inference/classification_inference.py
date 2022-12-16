@@ -2,7 +2,7 @@ import tensorflow as tf
 import numpy as np
 import os
 from PIL import Image
-from vit import create_vit
+from Models.Architectures.ViT.python.vit import create_vit
 
 img_size = 224
 n_channels = 3
