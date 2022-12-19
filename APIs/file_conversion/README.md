@@ -1,0 +1,1 @@
+These files take in a file uploaded to the viewer, convert it to .vti format, save it to the local storage, and returns the file path to be subsequently visualized. 
