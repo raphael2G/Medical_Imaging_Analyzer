@@ -13,6 +13,7 @@ Contains coded examples on select functionalities
 Stores model architectures (ViT, CNN, UNet), model training loops, and pretrained models
 - viewer
 Contains code for rendering volumes to the browser using vtk.js and react. 
+
 # How to start web viewer
 - cd into the "viewer" directory
 - run command in terminal "npm install --force"
