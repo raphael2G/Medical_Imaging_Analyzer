@@ -9,3 +9,9 @@ unet.finalize_model(reconstructed_model)
 
 def run_segmentation_inference(img_tensor):
     output = reconstructed_model.predict(img_tensor)
+    numpy_image = output.numpy()
+
+    # convert numpy array to image
+    # save image to a file
+    # return file path so the API can send the 
+    # the file path and load it into the viewer
