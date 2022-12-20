@@ -1,5 +1,5 @@
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi import FastAPI, File, UploadFile
+from fastapi import FastAPI, File, UploadFile, Response
 import urllib
 from PIL import Image
 import io
@@ -42,3 +42,11 @@ async def FileUpload(file: UploadFile = File(...)):
     json_compatible_item_data = jsonable_encoder(output)
 
     return JSONResponse(content=json_compatible_item_data)
+
+@app.post('/convert2vti/')
+async def FileUpload(file: UploadFile = File(...)):
+
+    # load starlette datastructure with .read() into bytes
+    data = await file.read()
+
+    return Response(content=data, media_type="application/xml")
