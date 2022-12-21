@@ -31,11 +31,33 @@ function FileUpload() {
 
 
   }
+  function SendtoApi(file) {
+    const formData2 = new FormData();
+    formData2.append("file", file);
+
+    const requestOptions = {
+      method: "POST",
+
+      //headers: { 'Content-Type': 'multipart/form-data' }, // DO NOT INCLUDE HEADERS
+      body: formData2,
+    };
+    fetch("http://127.0.0.1:8000/classify/", requestOptions)
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        console.log(data);
+        setResults(data);
+      });
+  }
 
   return (
     <div>
       <FileUploader
-        handleChange={(file) => GetUri(file)}
+        handleChange={(file) => {
+          GetUri(file);
+          SendtoApi(file);
+        }}
         children={<FileDrop />}
       />
     </div>
