@@ -26,10 +26,6 @@ function FileUpload() {
     reader.onerror = function () {
       console.log(reader.error);
     };
-
-
-
-
   }
   function SendtoApi(file) {
     const formData2 = new FormData();
