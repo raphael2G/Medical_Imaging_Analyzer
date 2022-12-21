@@ -26,9 +26,10 @@ function FileUpload() {
     reader.onerror = function () {
       console.log(reader.error);
     };
-    let formData = new formData();
-    formData.append("file", file);
-    fetch("/upload/image", { method: "POST", body: formData });
+
+
+
+
   }
 
   return (
