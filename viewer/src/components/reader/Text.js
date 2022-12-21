@@ -1,4 +1,0 @@
-const myText = 
-'dsaflkdjsfklasdjfklsadjfkldsjklfadsjlfjdslkfjasdlkfjdsklfjasdklfjadskljfasdklfjds'
-
-export default myText
