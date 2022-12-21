@@ -3,11 +3,17 @@ from fastapi import FastAPI, File, UploadFile, Response
 import urllib
 from PIL import Image
 import io
+import numpy as np
 
-from image_proccessing.remove_background import remove_background
-from image_proccessing.process_image import process_image
-from inference.classification_inference import run_classification_inference
-from inference.segmentation_inference import run_segmentation_inference
+# from image_proccessing.remove_background import remove_background
+# from image_proccessing.process_image import process_image
+
+# from inference.classification_inference import run_classification_inference
+
+from data_processing.extract_slices import extract_slices
+from inference.classification_inference import whole_classification_inference
+
+# from inference.segmentation_inference import run_segmentation_inference
 
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
@@ -43,10 +49,25 @@ async def FileUpload(file: UploadFile = File(...)):
 
     return JSONResponse(content=json_compatible_item_data)
 
-@app.post('/convert2vti/')
+@app.post('/classify-whole-file/')
 async def FileUpload(file: UploadFile = File(...)):
 
-    # load starlette datastructure with .read() into bytes
-    data = await file.read()
+    # load file 
 
-    return Response(content=data, media_type="application/xml")
+    data = np.load('../Datasets/extracted_np_slices/coronacases_001/image_data.npy') / 255.0
+
+    # reshape the data to [batch_size, img_size, img_size, channels=1]
+    shape = np.shape(data)
+    slices = np.reshape(data, [shape[0], shape[1], shape[2], 1])
+
+    # run inference on slices
+    output = whole_classification_inference(slices) # takes in np array, returns inferences in np array
+
+    # convert output to list
+    output = output.tolist()
+
+    # encode list in json
+    json_compatible_item_data = jsonable_encoder(output)
+
+    # return inferences encoded in JSON as API response
+    return JSONResponse(content=json_compatible_item_data)
