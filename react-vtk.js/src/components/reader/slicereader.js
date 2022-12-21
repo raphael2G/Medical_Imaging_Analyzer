@@ -76,10 +76,11 @@ function SliceReader() {
         <Button
           onClick={() => {
             const link = document.createElement("a");
-            const content = imagelist[imagelist.length - 1];
+            const content = files[0].uri;
             const file = new Blob([content], { type: "text/plain" });
             link.href = URL.createObjectURL(file);
             link.download = "sample.txt";
+            console.log(files)
 
             const formData2 = new FormData();
             formData2.append("file", file);
@@ -90,14 +91,15 @@ function SliceReader() {
               //headers: { 'Content-Type': 'multipart/form-data' }, // DO NOT INCLUDE HEADERS
               body: formData2,
             };
-            fetch("http://127.0.0.1:8000/classify/", requestOptions)
+            fetch("http://127.0.0.1:8000/classify-whole-file/", requestOptions)
               .then(function (response) {
                 return response.json();
               })
               .then(function (data) {
                 console.log(data);
-                setResults(data);
               });
+
+  
 
             // axios
             //   .post("http://localhost:9000/text", {
