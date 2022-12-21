@@ -2,10 +2,15 @@ import tensorflow as tf
 import numpy as np
 import os
 from PIL import Image
-from Models.Architectures.ViT.python.vit import create_vit
+from local_vit import create_vit
 
 img_size = 224
-n_channels = 3
+n_channels = 1
+
+
+reshape_model = tf.keras.Sequential([
+    tf.keras.layers.Resizing(img_size, img_size)
+])
 
 # 1. instantiate model architecture
 classification_model = create_vit(
@@ -34,4 +39,16 @@ def run_classification_inference(img_tensor):
   
     # return outputs
     return output
+
+def whole_classification_inference(np_array):
+
+    # reshape the data to [batch_size, img_size, img_size, channels=1]
+    shape = np.shape(np_array)
+    slices = np.reshape(np_array, [shape[0], shape[1], shape[2], 1])
+
+    # convert np array to tensor
+    tensor = tf.convert_to_tensor(slices)
+
+    # resize images, run inference, convert to np array and return
+    return classification_model(reshape_model(tensor)).numpy()
 
