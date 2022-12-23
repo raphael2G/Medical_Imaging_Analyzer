@@ -52,16 +52,15 @@ async def FileUpload(file: UploadFile = File(...)):
 @app.post('/classify-whole-file/')
 async def FileUpload(file: UploadFile = File(...)):
 
-    # load file 
+    goofy = await file.read()
 
-    data = np.load('../Datasets/extracted_np_slices/coronacases_001/image_data.npy') / 255.0
+    with open('temporary.vti', 'wb') as f:
+        f.write(goofy)
 
-    # reshape the data to [batch_size, img_size, img_size, channels=1]
-    shape = np.shape(data)
-    slices = np.reshape(data, [shape[0], shape[1], shape[2], 1])
+    data = extract_slices('APIs/temporary.vti')
 
     # run inference on slices
-    output = whole_classification_inference(slices) # takes in np array, returns inferences in np array
+    output = whole_classification_inference(data) # takes in np array, returns inferences in np array
 
     # convert output to list
     output = output.tolist()
