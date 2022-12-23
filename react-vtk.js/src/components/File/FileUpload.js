@@ -13,7 +13,7 @@ function FileDrop() {
 }
 
 function FileUpload() {
-  const { updateFiles, updateFileNameList } = useStateContext();
+  const { updateFiles, updateFileNameList, setResults } = useStateContext();
 
   function GetUri(file) {
     let reader = new FileReader();
