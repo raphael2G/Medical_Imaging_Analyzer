@@ -32,7 +32,7 @@ function DisableMouse() {
 }
 
 function SliceReader() {
-  const { files, selected, colorLevel, colorWindow, colorPreset } =
+  const { files, selected, colorLevel, colorWindow, colorPreset, results } =
     useStateContext();
   const jSliceRef = useRef();
   const [camera, setCamera] = useState([0, -180, 0]);
@@ -41,7 +41,6 @@ function SliceReader() {
   const [useLookupTableScalarRange, setUseLookupTableScalarRange] =
     useState(false);
   const [imagelist, setImageList] = useState([]);
-  const [results, setResults] = useState([[0, 0]]);
 
   return (
     <div style={{ height: "100vh", width: "100%" }}>
@@ -57,66 +56,6 @@ function SliceReader() {
           marginTop: "5px",
         }}
       >
-        <Button
-          variant="contained"
-          style={{ width: "100%" }}
-          onClick={() => setImageList([])}
-        >
-          Clear
-        </Button>
-
-        <Button
-          variant="contained"
-          style={{ width: "100%" }}
-          onClick={() => console.log(jSliceRef.current.renderWindow)}
-        >
-          print
-        </Button>
-
-        <Button
-          onClick={() => {
-            const link = document.createElement("a");
-            const content = files[0].uri;
-            const file = new Blob([content], { type: "text/plain" });
-            link.href = URL.createObjectURL(file);
-            link.download = "sample.txt";
-            console.log(files)
-
-            const formData2 = new FormData();
-            formData2.append("file", file);
-
-            const requestOptions = {
-              method: "POST",
-
-              //headers: { 'Content-Type': 'multipart/form-data' }, // DO NOT INCLUDE HEADERS
-              body: formData2,
-            };
-            fetch("http://127.0.0.1:8000/classify-whole-file/", requestOptions)
-              .then(function (response) {
-                return response.json();
-              })
-              .then(function (data) {
-                console.log(data);
-              });
-
-  
-
-            // axios
-            //   .post("http://localhost:9000/text", {
-            //     file: imagelist[0],
-            //   })
-            //   .then(function (response) {
-            //     console.log(response);
-            //   })
-            //   .catch(function (error) {
-            //     console.log(error);
-            //   });
-          }}
-          variant="contained"
-        >
-          SAVE
-        </Button>
-
         <input
           style={{
             width: "300px",
@@ -160,8 +99,8 @@ function SliceReader() {
           lineHeight: "50px",
         }}
       >
-        <h1> Negative : {results[0][0].toFixed(2)} </h1>
-        <h1> Positive : {results[0][1].toFixed(2)} </h1>
+        <h1> Negative : {results[0].toFixed(2)} </h1>
+        <h1> Positive : {results[1].toFixed(2)} </h1>
       </div>
 
       <View
