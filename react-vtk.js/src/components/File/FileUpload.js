@@ -37,7 +37,7 @@ function FileUpload() {
       //headers: { 'Content-Type': 'multipart/form-data' }, // DO NOT INCLUDE HEADERS
       body: formData2,
     };
-    fetch("http://127.0.0.1:8000/classify/", requestOptions)
+    fetch("http://127.0.0.1:8000/classify-whole-file", requestOptions)
       .then(function (response) {
         return response.json();
       })
