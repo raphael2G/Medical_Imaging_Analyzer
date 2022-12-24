@@ -51,3 +51,7 @@ def convertNii2Vti(source_path, vtk_download_target, vti_download_target, file_b
     print('--------- .vtk converted to .vti ---------')
 
 
+def convertVti2NiiGz(filepath, targetpath):
+    vtiReader = sitk.ImageFileReader
+    vtiReader.SetFileName(filepath)
+
