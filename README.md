@@ -1,9 +1,6 @@
 # Purpose
 This repository is a for the purpose of deep learning based medical imaging analysis research engine. Using vtk.js + react we visualize medical volumes. Using this framework, we're able to process data volumes to useable image and image sequences for the purpose of analysis via machine learning based architectures, namely CNNs, ViT, and U-Net (among others). 
 
-# Goals
-We plan on writting and publishing a research paper in the coming months. One in progress can be seen here: https://docs.google.com/document/d/1sjIELem18L4hozCrRKCQv5dXtrsDkPN3m3kR0NGfrJg/edit?usp=sharing
-
 # File structure
 The repository is broken down into various different folders. Here is an overview on the purpose of each folder. 
 - APIs
