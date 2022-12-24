@@ -54,8 +54,8 @@ async def FileUpload(file: UploadFile = File(...)):
 
     goofy = await file.read()
 
-    with open('temporary.vti', 'wb') as f:
-        f.write(goofy)
+    # with open('temporary.vti', 'wb') as f:
+    #     f.write(goofy)
 
     data = extract_slices('APIs/temporary.vti')
 
