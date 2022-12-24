@@ -44,7 +44,6 @@ function FileUpload() {
       .then(function (data) {
         console.log(data);
         updateResultsArray(data)
-
       });
   }
 
