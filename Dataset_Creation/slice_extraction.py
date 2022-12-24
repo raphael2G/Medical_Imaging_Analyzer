@@ -8,11 +8,32 @@ Usage: python Extract_NIFTI.py path_to_file_name.nii.gz
 import SimpleITK as sitk  #We can also use other libraries. e.g., NiBabel
 import os
 import numpy as np
+from vtk import vtkStructuredPointsWriter
+from vtk import vtkXMLPolyDataReader
 
+def extract_slices(file_name):
+    return np.load('Datasets/extracted_np_slices/coronacases_001/image_data.npy')
 
-
-def extract_slices(location_to_file, target_download):
+def developing_extract_slices(location_to_file, target_download):
     current=os.getcwd()
+
+    vtiReader = vtkXMLPolyDataReader()
+    vtiReader.SetFileName('APIs/temporary.vti')
+
+    vtkWriter = vtkStructuredPointsWriter()
+    vtkWriter.SetInputConnection(vtiReader.GetOutputPort())
+    vtkWriter.SetFileName('APIs/temporary.vtk')
+    vtkWriter.Write()
+
+    niiReader = sitk.ImageFileReader()
+    niiReader.SetImageIO("NiftiImageIO")
+    niiReader.SetFileName('APIs/temporary.nii.gz')
+    niiImage = niiReader.Execute()
+
+    vtkWriter = sitk.ImageFileWriter()
+    vtkWriter.SetFileName(vtkImageFilePath)
+    vtkWriter.Execute(niiImage)
+
 
     #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
     #Create directory in the working directory for saving extracted data 
@@ -26,31 +47,24 @@ def extract_slices(location_to_file, target_download):
     else:
         print ("Successfully created data directory")
 
-    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
-    #Define function which extracts header information in a dictionary
-    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
-    def header_info(My_image):
-        header = {} 
-        for k in My_image.GetMetaDataKeys():
-            header[k]=My_image.GetMetaData(k)
-        return(header)
 
     #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
     #Extract and save data in the created directory (in numpy format)
     #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
-    itk_image = sitk.ReadImage(location_to_file)
+    itk_image = sitk.ReadImage('APIs/temporary.vtk')
     #Extract and save image data in numpy format
     image = sitk.GetArrayFromImage(itk_image)  #multidimensional array
     image_path=current+"/"+directory_name+"/"+"image_data" #for win system
     np.save(image_path, image, allow_pickle=True)
-    #Extract and save header data in numpy format
-    header=header_info(itk_image)
-    header_path=current+"/"+directory_name+"/"+"header_data" #for win system
-    np.save(header_path, header, allow_pickle=True)
 
     print('Done!')
 
-extract_slices('Datasets/COVID-19-CT/niiGz/coronacases_001.nii.gz', 'Datasets/temporary/extracted_slices_np')
+
+
+
+
+
+
 
 
 
