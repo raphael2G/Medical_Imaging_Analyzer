@@ -7,7 +7,6 @@ Usage: python Extract_NIFTI.py path_to_file_name.nii.gz
 
 import SimpleITK as sitk  #We can also use other libraries. e.g., NiBabel
 import os
-import sys
 import numpy as np
 
 
