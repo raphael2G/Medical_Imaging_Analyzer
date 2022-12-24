@@ -32,7 +32,7 @@ function DisableMouse() {
 }
 
 function SliceReader() {
-  const { files, selected, colorLevel, colorWindow, colorPreset, results } =
+  const { files, selected, colorLevel, colorWindow, colorPreset, resultsArray } =
     useStateContext();
   const jSliceRef = useRef();
   const [camera, setCamera] = useState([0, -180, 0]);
@@ -71,9 +71,9 @@ function SliceReader() {
             setJSlice(e.target.value);
           }}
           type={"range"}
-          max={275}
+          max={resultsArray.length-1}
           min={0}
-          step={0.01}
+          step={1}
         ></input>
       </div>
 
@@ -99,8 +99,8 @@ function SliceReader() {
           lineHeight: "50px",
         }}
       >
-        <h1> Negative : {results[0].toFixed(2)} </h1>
-        <h1> Positive : {results[1].toFixed(2)} </h1>
+        <h1> Negative : {resultsArray[jSlice][0].toFixed(2)} </h1>
+        <h1> Positive : {resultsArray[jSlice][1].toFixed(2)} </h1>
       </div>
 
       <View

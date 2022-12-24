@@ -21,7 +21,16 @@ export const StateContext = ({ children }) => {
   const [colorWindow, setColorWindow] = useState(2095);
   const [colorLevel, setColorLevel] = useState(1000);
   const [colorPreset, setColorPreset] = useState("Grayscale");
-  const [results, setResults] = useState([0, 0]);
+  const [results, setResults] = useState(0);
+  const [resultsArray,setResultsArray] = useState([0,0])
+
+  const updateResultsArray = (list) => {
+    setResultsArray(list)
+  }
+
+  const updateResults = (n) => {
+    setResults(n)
+  }
 
   const updateColorWindow = (n) => {
     setColorWindow(n);
@@ -115,6 +124,8 @@ export const StateContext = ({ children }) => {
         colorWindow,
         results,
         setResults,
+        updateResultsArray,resultsArray,updateResults
+
       }}
     >
       {children}
