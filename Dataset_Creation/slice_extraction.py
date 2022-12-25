@@ -17,23 +17,6 @@ def extract_slices(file_name):
 def developing_extract_slices(location_to_file, target_download):
     current=os.getcwd()
 
-    vtiReader = vtkXMLPolyDataReader()
-    vtiReader.SetFileName('APIs/temporary.vti')
-
-    vtkWriter = vtkStructuredPointsWriter()
-    vtkWriter.SetInputConnection(vtiReader.GetOutputPort())
-    vtkWriter.SetFileName('APIs/temporary.vtk')
-    vtkWriter.Write()
-
-    niiReader = sitk.ImageFileReader()
-    niiReader.SetImageIO("NiftiImageIO")
-    niiReader.SetFileName('APIs/temporary.nii.gz')
-    niiImage = niiReader.Execute()
-
-    vtkWriter = sitk.ImageFileWriter()
-    vtkWriter.SetFileName(vtkImageFilePath)
-    vtkWriter.Execute(niiImage)
-
 
     #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
     #Create directory in the working directory for saving extracted data 
@@ -51,13 +34,15 @@ def developing_extract_slices(location_to_file, target_download):
     #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
     #Extract and save data in the created directory (in numpy format)
     #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
-    itk_image = sitk.ReadImage('APIs/temporary.vtk')
+    itk_image = sitk.ReadImage(location_to_file)
     #Extract and save image data in numpy format
     image = sitk.GetArrayFromImage(itk_image)  #multidimensional array
     image_path=current+"/"+directory_name+"/"+"image_data" #for win system
     np.save(image_path, image, allow_pickle=True)
 
     print('Done!')
+
+developing_extract_slices('Datasets/COVID-19-CT/niiGz/coronacases_001.nii.gz', 'Datasets/extracted_np_slices')
 
 
 
