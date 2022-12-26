@@ -14,7 +14,7 @@ from vtk import vtkXMLPolyDataReader
 def extract_slices(file_name):
     return np.load('Datasets/extracted_np_slices/coronacases_001/image_data.npy')
 
-def developing_extract_slices(location_to_file, target_download):
+def developing_extract_slices(location_to_file):
     current=os.getcwd()
 
 
@@ -42,7 +42,7 @@ def developing_extract_slices(location_to_file, target_download):
 
     print('Done!')
 
-developing_extract_slices('Datasets/COVID-19-CT/niiGz/coronacases_001.nii.gz', 'Datasets/extracted_np_slices')
+# developing_extract_slices('Datasets/COVID-19-CT/niiGz/coronacases_001.nii.gz')
 
 
 
