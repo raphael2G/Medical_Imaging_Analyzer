@@ -70,3 +70,8 @@ async def FileUpload(file: UploadFile = File(...)):
 
     # return inferences encoded in JSON as API response
     return JSONResponse(content=json_compatible_item_data)
+
+@app.post('/convert-file/')
+async def FileUpload(file: UploadFile = File(...)):
+    # do file conversion
+    return Response(file, mimetype="volume/vti")
