@@ -2,6 +2,7 @@
 This repository is a for the purpose of deep learning based medical imaging analysis research engine. Using vtk.js + react we visualize medical volumes. Using this framework, we're able to process data volumes to useable image and image sequences for the purpose of analysis via machine learning based architectures, namely CNNs, ViT, and U-Net (among others). 
 
 # File structure
+
 The repository is broken down into various different folders. Here is an overview on the purpose of each folder. 
 - APIs
 Contains code for creating a locally hosted API enabling file converison and model inference in the web based volume renderere through FastAPI
