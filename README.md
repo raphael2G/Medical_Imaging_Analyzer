@@ -3,20 +3,28 @@ This repository is a for the purpose of deep learning based medical imaging anal
 
 # How to start web viewer
 - cd into the "viewer" directory
+
 ```cd viewer```
+
 - install npm dependencies
+
 ```npm install --force```
+
 - start viewer on local host
+
 ```npm start```
 
 The viewer is now open. You can upload .vti files (more to be implemented soon, see to-do) to display volumes. See usage for more. 
 
 # How to enable API
 - cd into the "APIs" directory
+
 ```cd APIs```
 - install python dependencies
+
 ```pip install requirements.txt```
 - start API 
+
 ```uvicorn API:app --reload```
 - Identify the locally hosted port on which the API is running
 - Access the file "viewer/src/components/reader/slicereader.js"
