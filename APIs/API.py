@@ -71,6 +71,68 @@ async def FileUpload(file: UploadFile = File(...)):
     # return inferences encoded in JSON as API response
     return JSONResponse(content=json_compatible_item_data)
 
+
+# take volume, save to local files, load from local files, run inference, send inference, send heatmap
+@app.post('/classify-and-generate-heatmap/')
+async def FileUpload(file: UploadFile = File(...)):
+
+    goofy = await file.read()
+
+    data = extract_slices('APIs/temporary.vti')
+
+    classification, heatmap_location = classification_heatmap_classification(data)
+
+
+
+    # run inference on slices
+    output = whole_classification_inference(data) # takes in np array, returns inferences in np array
+
+    # convert output to list
+    output = output.tolist()
+
+    # encode list in json
+    json_compatible_item_data = jsonable_encoder(output)
+
+    # return inferences encoded in JSON as API response
+    return JSONResponse(content=json_compatible_item_data)
+
+
+@app.post('/save-file/')
+async def SaveFile(file: UploadFile = File(...)):
+    goofy = await file.read()
+
+    data = extract_slices('APIs/temporary.vti')
+
+    # encode list in json
+    json_compatible_item_data = jsonable_encoder('APIs/temporary.vti')
+
+    # return inferences encoded in JSON as API response
+    return JSONResponse(content=json_compatible_item_data)
+
+@app.post('/run-classification')
+async def RunClassification():
+
+    data = np.load('APIs/temporary.vti')
+
+    # run inference on slices
+    output = whole_classification_inference(data) # takes in np array, returns inferences in np array
+
+    # convert output to list
+    output = output.tolist()
+
+    # encode list in json
+    json_compatible_item_data = jsonable_encoder(output)
+
+    # return inferences encoded in JSON as API response
+    return JSONResponse(content=json_compatible_item_data)
+
+@app.post('/send-heatmap/')
+async def FileUpload(file: UploadFile = File(...)):
+
+    data = np.load('path/to/heatmap')
+
+    return data
+
 @app.post('/convert-file/')
 async def FileUpload(file: UploadFile = File(...)):
     # do file conversion
