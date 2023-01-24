@@ -43,13 +43,3 @@ def developing_extract_slices(location_to_file):
     print('Done!')
 
 # developing_extract_slices('Datasets/COVID-19-CT/niiGz/coronacases_001.nii.gz')
-
-
-
-
-
-
-
-
-
-
