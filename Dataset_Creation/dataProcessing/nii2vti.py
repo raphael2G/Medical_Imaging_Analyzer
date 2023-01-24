@@ -1,8 +1,13 @@
 import os
+print('os imported')
+
 import SimpleITK as sitk
+print('sitk imported')
 
 from vtk import vtkStructuredPointsReader
 from vtk import vtkXMLImageDataWriter
+print('vtk reader and writer imported')
+
 
 def convertNii2Vti(source_path, vtk_download_target, vti_download_target, file_base):
     niiGzImageFileName = file_base +'.nii.gz'
@@ -51,7 +56,5 @@ def convertNii2Vti(source_path, vtk_download_target, vti_download_target, file_b
     print('--------- .vtk converted to .vti ---------')
 
 
-def convertVti2NiiGz(filepath, targetpath):
-    vtiReader = sitk.ImageFileReader
-    vtiReader.SetFileName(filepath)
+convertNii2Vti('Datasets/Model_CTA_Maps/.nii.gz', 'Datasets/Model_CTA_Maps/.vtk', 'Datasets/Model_CTA_Maps/.vti', 'CTA_Bilateral_SFA_Multifocal_Stenoses_Full_Low')
 
