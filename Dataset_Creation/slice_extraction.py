@@ -7,9 +7,9 @@ Usage: python Extract_NIFTI.py path_to_file_name.nii.gz
 
 import SimpleITK as sitk  #We can also use other libraries. e.g., NiBabel
 import os
-import numpy as np
-from vtk import vtkStructuredPointsWriter
-from vtk import vtkXMLPolyDataReader
+# import numpy as np
+# from vtk import vtkStructuredPointsWriter
+# from vtk import vtkXMLPolyDataReader
 
 def extract_slices(file_name):
     return np.load('Datasets/extracted_np_slices/coronacases_001/image_data.npy')
@@ -43,3 +43,17 @@ def developing_extract_slices(location_to_file):
     print('Done!')
 
 # developing_extract_slices('Datasets/COVID-19-CT/niiGz/coronacases_001.nii.gz')
+
+def header_info(location='Datasets/Model_CTA_Maps/vtk/CTA_Bilateral_SFA_Multifocal_Stenoses_Full_Low.vtk'):
+    itk_image = sitk.ReadImage(location)
+    header = {} 
+    for k in itk_image.GetMetaDataKeys():
+        header[k]=itk_image.GetMetaData(k)
+    return(header)
+
+header = header_info()
+print(header)
+
+with open('CRA_bilateral_vtk.txt', 'w') as f:
+    f.write(str(header))
+
