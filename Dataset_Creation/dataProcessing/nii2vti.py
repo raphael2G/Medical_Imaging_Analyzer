@@ -56,5 +56,5 @@ def convertNii2Vti(source_path, vtk_download_target, vti_download_target, file_b
     print('--------- .vtk converted to .vti ---------')
 
 
-convertNii2Vti('Datasets/Model_CTA_Maps/.nii.gz', 'Datasets/Model_CTA_Maps/.vtk', 'Datasets/Model_CTA_Maps/.vti', 'CTA_Bilateral_SFA_Multifocal_Stenoses_Full_Low')
+convertNii2Vti('Datasets/Model_CTA_Maps/niigz', 'Datasets/Model_CTA_Maps/vtk', 'Datasets/Model_CTA_Maps/vti', 'Pos_Bilateral_SFA_Multifocal_Stenoses')
 
